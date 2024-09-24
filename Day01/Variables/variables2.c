@@ -15,5 +15,5 @@ int main(void)
     printf("Temperature en Celsuis ?\n");
     scanf("%f", &temperature);
     temperature = temperature + 273.15;
-    printf("%f", temperature);
+    printf("%f\n", temperature);
 }
