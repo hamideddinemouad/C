@@ -22,5 +22,4 @@ int main()
     month_in_char = strtok(str,'/');
     printf(" month_in char%s\n", month_in_char);
     return (0);
-
 }
