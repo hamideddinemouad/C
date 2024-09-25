@@ -15,23 +15,26 @@ int main()
 
     printf("entrez une moyenne!\n");
     scanf("%d", &moyenne);
-    switch ()
+
+    if (moyenne < 10)
     {
-        case moyenne < 10:
-            printf("recalé\n");
-            break;
-        case moyenne < 12:
-            printf("passable\n");
-            break;
-        case moyenne < 14:
-            printf("assez bien\n");
-            break;
-        case moyenne < 16:
-            printf("bien\n");
-            break;
-        default:
-            printf("tres bien\n");
-            break;
+        printf("recale\n");
+    }
+    else if (moyenne < 12)
+    {
+        printf("passable\n");
+    }
+    else if (moyenne < 14)
+    {
+        printf("assez bien\n");
+    }
+    else if (moyenne < 16)
+    {
+        printf("bien\n");
+    }
+    else
+    {
+        printf("Tres bien\n");
     }
     return (0);
 }
