@@ -1,0 +1,21 @@
+Objectif :
+Créer un programme qui affiche un menu à l'utilisateur avec les options suivantes :
+
+Addition : Ajouter deux ou plusieurs nombres.
+Soustraction : Soustraire deux nombres.
+Multiplication : Multiplier deux ou plusieurs nombres.
+Division : Diviser deux nombres, avec gestion de la division par zéro.
+Moyenne : Calculer la moyenne d'une série de nombres.
+Valeur absolue : Calculer la valeur absolue d'un nombre.
+Exponentiation : Calculer un nombre à une certaine puissance.
+Racine carrée : Calculer la racine carrée d'un nombre positif.
+
+L'utilisateur pourra choisir une opération à effectuer, voir le résultat, et revenir au menu principal ou quitter le programme.
+
+Compétences ciblées :
+Boucles : Répéter le menu principal jusqu'à ce que l'utilisateur choisisse de quitter.
+Conditions : Sélectionner et exécuter l'opération en fonction du choix de l'utilisateur.
+Variables : Stocker les entrées et résultats des calculs.
+Gestion d'erreurs : Gérer les divisions par zéro, les entrées invalides pour la racine carrée, etc.
+
+

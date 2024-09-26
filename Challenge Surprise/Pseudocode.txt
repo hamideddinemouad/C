@@ -1,0 +1,6 @@
+en boucle
+utilisateur lance le programme
+le menu est affiché avec un bouton pour quitter
+demander quel operation mathematique
+choisir l'operation
+gerer les divison par zero et entree invalides pour racine carré
