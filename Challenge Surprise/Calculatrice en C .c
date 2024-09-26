@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 /**
-* menu - affichage
+* menu - fonction pour calculatrice
 * 
 * Description: affiche le menu de la calculatrice
 *
@@ -21,35 +21,12 @@ void menu()
     printf("Choisissez une option en entrant le nombre loperation! ou entrez 0 pour quitter\n");
 }
 /**
-* addition - additione deux nombre
+* addition - 
 * 
-* Description: addition e deux nombres
+* Description: addition de 2 ou plusieurs nombre
 *
-* Return: rien
+* Return: 0 (succes)
 */
-/*
-signed long int addition()
-{
-    signed long int resultat = 0, nombre_operation, compteur, compteur_count;
-    signed long int stockage[100] = {0};
-    printf("entrez combien de nombre vous voulez additioner!\n");
-    scanf("%ld", nombre_operation);
-    for (compteur = 0; compteur <= nombre_operation - 1; compteur++)
-    {
-        printf("entrez un numero\n");
-        scanf("%ld", stockage[compteur]);
-        printf("stockage[%ld] = %ld",compteur, stockage[compteur]);
-    }
-    // for loop to count
-    for (compteur_count = nombre_operation; compteur_count <= nombre_operation -1; compteur_count++)
-    {
-        resultat = resultat + stockage[compteur_count];
-    }
-    printf("resultat = %d\n", resultat);
-    return (0);
-}
-*/
-
 int addition()
 {
      int nombre_operation, resultat  = 0, nombre_entre;
@@ -66,7 +43,13 @@ int addition()
      printf("resultat = %d\n", resultat);
      return (0);
 }
-
+/**
+* soustraction - soustracttion
+* 
+* Description: affiche le menu de la calculatrice
+*
+* Return: rien
+*/
 int soustraction()
 {
      int a, b, resultat;
@@ -79,6 +62,13 @@ int soustraction()
      printf("resultat = %d\n", resultat);
      return (0);
 }
+/**
+* menu - affichage
+* 
+* Description: affiche le menu de la calculatrice
+*
+* Return: rien
+*/
 int mutliplication()
 {
      int nombre_operation, resultat  = 1, nombre_entre;
@@ -95,6 +85,13 @@ int mutliplication()
      printf("resultat = %d\n", resultat);
      return (0);
 }
+/**
+* division - fonction pour calculatrice.C
+* 
+* Description: divise les nombres
+*
+* Return:  Toujours 0 (succès)
+*/
 int division()
 {
     int nominateur, denominateur, resultat;
@@ -112,6 +109,13 @@ int division()
     printf("%d\n", resultat);
     return (0);
 }
+/**
+* moyenne - moyenne
+* 
+* Description: affiche la moyenne d'un groupe de nombre
+*
+* Return: toujours 0
+*/
 int moyenne()
 {
      int nombre_operation, resultat  = 0, nombre_entre, nombre_entre_copie;
@@ -131,6 +135,13 @@ int moyenne()
      printf("resultat = %d\n", resultat);
      return (0);
 }
+/**
+* valeur_absolue - valeur absolue
+* 
+* Description: valeur_absolue d'un nombre
+*
+* Return: Toujours 0 (succès)
+*/
 int valeur_absolue()
 {
     int valeur;
@@ -146,6 +157,13 @@ int valeur_absolue()
     printf("valeur absolue = %d\n", valeur);
     return (0);
 }
+/**
+* exponentiation - exponentiation
+* 
+* Description: expononente un nombre
+*
+* Return:Toujours 0 (succès)
+*/
 int exponentiation()
 {
     int result, number, exponent;
@@ -158,6 +176,13 @@ int exponentiation()
     printf("numero %d a l'exponent %d = %d\n", number, exponent, result);
     return (0);
 }
+/**
+* racine_carre - racine carré
+* 
+* Description: racine carré d'un nombre
+*
+* Return: Toujours 0 (succès)
+*/
 int racine_carre()
 {
     int resultat, numero;
