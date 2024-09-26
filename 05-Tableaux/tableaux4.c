@@ -15,13 +15,14 @@ int main()
     printf("combien d'entree ?\n");
     scanf("%d", &nombre_valeurs);
 
-    int valeurs[nombre_valeurs], plus_grand = 0;
+    int valeurs[nombre_valeurs], plus_grand;
 
     for (compteur = 0; compteur < nombre_valeurs; compteur++)
     {
         printf("valeur %d ?\n", compteur + 1);
         scanf("%d", &valeurs[compteur]);
     }
+    plus_grand = valeurs[0];
     for (compteur = 0; compteur < nombre_valeurs; compteur ++)
     {
         if (plus_grand < valeurs[compteur])
