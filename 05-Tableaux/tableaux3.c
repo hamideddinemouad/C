@@ -3,19 +3,20 @@
 /**
 * main - entrée du program
 * 
-* Description: initialise un tableau d'entiers avec des valeurs données et affiche ces valeurs
+* Description: affiche la somme des éléments d'un tableau d'entiers. Le programme doit demander
+* le nombre d'éléments, puis les éléments du tableau, et afficher la somme totale
 *
 * Return: toujours 0 (succès)
 */
 
-int main ()
+int main()
 {
     int nombre_valeurs, compteur = 0;
 
     printf("combien d'entree ?\n");
     scanf("%d", &nombre_valeurs);
 
-    int valeurs[nombre_valeurs];
+    int valeurs[nombre_valeurs], somme = 0;
 
     for (compteur = 0; compteur < nombre_valeurs; compteur++)
     {
@@ -24,7 +25,8 @@ int main ()
     }
     for (compteur = 0; compteur < nombre_valeurs; compteur ++)
     {
-        printf("%d\n", valeurs[compteur]);
+        somme += valeurs[compteur];
     }
+    printf("somme = %d\n", somme);
     return (0);
 }
