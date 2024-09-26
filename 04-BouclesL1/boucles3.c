@@ -15,6 +15,7 @@ int main()
 
     printf("entrez un nombre  n pour  avoir la somme ses n premiers nombres naturels\n");
     scanf("%d", &nombre);
+    printf("nombre = %d", nombre);
     if (nombre <= 0)
     {
         printf("pas de 0 ou nombre negatives\n");
@@ -23,7 +24,7 @@ int main()
     //pour n = 4, la somme est 1 + 2 + 3 + 4 = 10.
     //compteur retour en arriere
     compteur = nombre -1;
-    nombre_original = nombre
+    nombre_original = nombre;
     for (compteur; compteur <= 0; compteur--)
     {
         nombre = nombre + compteur;
@@ -31,6 +32,6 @@ int main()
     //comment print les nombres avant n et du plus petit au grand
     //on peut les stocker dans un tableau ? TROP COMPLIQUE
     //sachant que le compteur diminue avec la boucle comment peut on utiliser ça 
-    printf("%d");
+    printf("nombre = %d", nombre);
 }
 
