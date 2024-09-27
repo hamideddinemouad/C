@@ -1,0 +1,6 @@
+l'utilisateur lance
+menu
+choix depuis le menu du fonctionnalités
+gestion de donnee ?
+input : string
+traite 
