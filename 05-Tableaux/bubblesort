@@ -1,0 +1,6 @@
+// Start at the first element of the array.
+// Compare the current element with the next element.
+// Check if the current element is greater than the next element, swap them.
+// Move to the next pair of elements and repeat the comparison and swap if needed.
+// After each complete pass through the array, the largest unsorted element is placed at its correct position at the end of the array.
+// Repeat the process for the remaining unsorted elements until the entire array is sorted.

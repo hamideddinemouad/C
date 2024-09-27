@@ -1,0 +1,12 @@
+#include <stdio.h>
+/**
+* main - entrée du program
+* 
+* Description: 
+*
+* Return: toujours 0 (succès)
+*/
+int main()
+{
+    
+}
