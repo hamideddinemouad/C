@@ -9,7 +9,7 @@
 */
 int main()
 {
-    int tableau_saisi[10] = {0}, compteur, entree, temp, compteur_envers = 10;
+    int tableau_saisi[10] = {0}, compteur, entree, temp, compteur_envers = 10, compteur2;
     printf("saisissez des nombres\n");
     //remplissage du tableau
     for (compteur = 0; compteur < 10; compteur++)
@@ -29,20 +29,12 @@ int main()
             printf(", ");
         }
     }
-    for (compteur = 0; compteur < 10; compteur++)
+    for (compteur = 0; compteur < 4; compteur++)
     {
         compteur_envers--;
         temp = tableau_saisi[compteur];
-        printf("avant inversion\n");
-        printf("temp = %d\n", temp);
-        printf("tableau_saisi[compteur] = %d\n", tableau_saisi[compteur]);
-        printf("tableau_saisi[compteur_envers] = %d\n", tableau_saisi[compteur_envers]);
         tableau_saisi[compteur] = tableau_saisi[compteur_envers];
         tableau_saisi[compteur_envers] = temp;
-        printf("apres inversion\n");
-        printf("tableau_saisi[compteur] = %d\n", tableau_saisi[compteur]);
-        printf("tableau_saisi[compteur_envers] = %d\n", tableau_saisi[compteur_envers]);
-        printf("\n");
     }
     printf("]\n");
     printf("tableau a l'envers\n");
