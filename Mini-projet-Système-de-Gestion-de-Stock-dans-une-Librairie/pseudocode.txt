@@ -3,4 +3,9 @@ menu
 choix depuis le menu du fonctionnalités
 gestion de donnee ?
 input : string
-traite 
+traite
+prendre les numero comme etant des strings
+apres
+verifier si string est un num
+si oui on le met dans sa variable respective 
+sinon on affiche une erreur et continue le programme
