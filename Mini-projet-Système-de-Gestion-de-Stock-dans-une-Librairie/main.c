@@ -169,7 +169,7 @@ int main()
             printf("entrez le nom du livre que vous souhaitez supprimer\n");
             scanf(" %[^\n]", case5_titre);
             //trouver titre
-            for (compteur1 = 0; compteur1 != position_1; compteur1++)
+            for (compteur1 = 0; compteur1 > position_1; compteur1++)
             {
                 if (strcmp(case5_titre, base_titre[compteur1]) == 0)
                 {
@@ -186,7 +186,11 @@ int main()
                 {
                     printf("suppression\n");
                     strcpy(base_titre[compteur1], base_titre[compteur1 + 1]);
+                    strcpy(base_auteur[compteur1], base_auteur[compteur1 + 1]);
+                    base_prix[compteur1] = base_prix[compteur1 + 1];
+                    base_quantite[compteur1] = base_prix[compteur1 + 1];
                 }
+                position_1 = position_1 - 1;
             }
             else if (case5_index < 0)
             {
