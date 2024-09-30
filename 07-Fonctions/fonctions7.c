@@ -1,32 +1,27 @@
 #include <stdio.h>
+#include <string.h>
 /*
-* fibonacci -  prendre un entier en paramètre et retourner le n-ième terme
-* @a : numero
-* return: la fibonacci nombre
+* string_inverse -  prendre un string et l'inverse
+* @tableau : string
+* return: rien
 */
-int fibonacci(int a)
+void string_inverse(char tableau[])
 {
-    int i;
-    int fibonacci = 1;
-    int fibonacci_prec = 0;
-    int temp;
+    int index;
 
-    for (i = 0; i < a; i++)
+    printf("size of(tableau) %d= \n", strlen(tableau));
+
+    for (index = strlen(tableau); index >= 0; index--)
     {
-        temp = fibonacci; //
-        fibonacci = fibonacci_prec + fibonacci; 
-        fibonacci_prec = temp;
-        printf("fibonaaci = %d", fibonacci);
+        printf("%c", tableau[index]);
     }
-    return (fibonacci);
 }
 /*
 *   main - entree du programme
-*   return: fibonacci des deux parametres
+*   return: (0) afficher une chaîne inversée
 */
 int main()
 {
-    int a = 10;
-    printf("le nombre  %d de la suite fibonacci = %d\n", a, fibonacci(a));
-    return (0);
+    char caracteres[] = "a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z";
+    string_inverse(caracteres);
 }
