@@ -1,0 +1,2 @@
+fgets : gerer les erreur d'entree
+array of structs
