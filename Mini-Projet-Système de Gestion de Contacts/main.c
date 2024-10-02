@@ -408,6 +408,7 @@ int supprimer_contact ()
  */
 void menu()
 {
+    printf("0. Pour quitter le programme\n");
     printf("1. Ajouter un Contact\n");
     printf("2. Modifier un Contact\n");
     printf("3. Supprimer un Contact\n");
@@ -470,8 +471,6 @@ int main ()
         no_new_line(buffer);
         switch (buffer[0])
         {
-            case '\n' :
-                continue;
             case '\0' :
                 continue;
             case '1' :
@@ -491,6 +490,8 @@ int main ()
             case '5' :
                 recherche_contact_afficher();
                 break;
+            case '0' :
+                return(0);
             default:
                 continue;
                 //printf("buffer[0] = %c\n", buffer[0]);
