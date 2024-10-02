@@ -1,11 +1,15 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 /**
-* struct infos - structure to hold personal infos
-* @nom: tableau pour string
-* @telephone: tableau pour string
-* @mail: tableau pour string
+ * tab_null - tableau à '\0'
+ * @tableau: adresse tableau à réinitialiser
+ *
+ * Description: Cette fonction parcourt un tableau et remplace chaque place'\0'.
+ *
+ * return: rien (void);
  */
  void tab_null(char* tableau)
 {
@@ -17,6 +21,12 @@
         index++;
     }
 }
+/**
+* struct infos - structure to hold personal infos
+* @nom: tableau pour string
+* @telephone: tableau pour string
+* @mail: tableau pour string
+*/
 typedef struct infos_contact
 {
     char nom[100]; // pour determiner la taille du tableau strlen(string) + 1;
@@ -29,10 +39,19 @@ contact liste_contacts[300];
 char buffer_ajout[100];
 char buffer_modifier_contact[100];
 char buffer_supprimer_contact[100];
+char buffer_recherche_contact[100];
 int index_supprimer_contact;
 int index_ajout = 0;
 int id = 1;
 
+/**
+ * no_new_line - Retire le caractère de nouvelle ligne '\n'
+ * @tableau: adresse du tableau à modifier
+ *
+ * Description: remplace le caractère '\n' par '\0' pour éviter les problèmes
+ *
+ * Return: rien (void)
+ */
 void no_new_line(char *tableau)
 {
     int index_no_new_line = 0;
@@ -47,7 +66,14 @@ void no_new_line(char *tableau)
     index_no_new_line++;
     }
 }
-
+/**
+ * recherche_contact - recherche un contact par nom
+ * @recherche_contact_nom: nom du contact à rechercher
+ *
+ * Description: parcourt la liste des contacts pour trouver un nom qui correspond
+ *
+ * Return: 0 si trouvé, -1 si non trouvé
+ */
 int recherche_contact(char* recherche_contact_nom)
 {
     int index_recherche_contact;
@@ -63,6 +89,15 @@ int recherche_contact(char* recherche_contact_nom)
     }
     return (-1); // contact non existant
 }
+/**
+ * numero_valide - valide si le numéro est composé uniquement de chiffres
+ * @str_numero:  string
+ *
+ * Description: vérifie que chaque caractère est un chiffre.
+ *
+ * Return: 0 si non valide (pas de caractere autre que numero), -1 si valide
+ */
+
 int numero_valide(char* str_numero)
 {
     unsigned int numero_valide_index;
@@ -77,6 +112,7 @@ int numero_valide(char* str_numero)
     }
     return (-1); //que des numero
 }
+
 int recherche_num(char* recherche_contact_num)
 {
     int index_recherche_num;
@@ -91,6 +127,13 @@ int recherche_num(char* recherche_contact_num)
     }
     return (-1); // num non existant
 }
+/**
+ * ajout_nom - ajoute un nouveau contact par nom
+ *
+ * Description: ajoute un nouveau contact par nom
+ *
+ * Return: rien
+ */
 int ajout_nom()
 {
     char buffer_ajout_nom[100];
@@ -112,6 +155,13 @@ int ajout_nom()
     ajout_nom();
     return (0);
 }
+/**
+ * ajout_telephone - ajoute un numéro de téléphone au contact
+ *
+ * Description: on rajoute si le numéro est valide et s'il n'existe pas déjà dans la liste des contacts.
+ * 
+ * Return: toujours (0)
+ */
 int ajout_telephone()
 {
     char buffer_ajout_tel[100];
@@ -135,6 +185,13 @@ int ajout_telephone()
     ajout_telephone();
     return (0);
 }
+/**
+ * mail_valide - verifier si la format de l'email est valide
+ *
+ * Description: vérifie si l'e-mail est valide et ajoute au contact actuel
+ *
+ * Return: rien
+ */
 int mail_valide(char* str_mail)
 {
     unsigned int mail_valide_index;
@@ -154,6 +211,13 @@ int mail_valide(char* str_mail)
     return (0); //mail etrange
 }
 
+/**
+ * recharcher_mail - recharche une adresse mail 
+ *
+ * Description: vérifie si l'e-mail est valide et ajoute au contact actuel
+ *
+ * Return: 0
+ */
 int recherche_mail(char* recherche_contact_mail)
 {
     int index_recherche_mail;
@@ -168,6 +232,13 @@ int recherche_mail(char* recherche_contact_mail)
     }
     return (-1); // num non existant
 }
+/**
+ * recharcher_mail - apel au fonctions d'email
+ * 
+ * Description: demande a l'utilisateur un mail vérifie si l'e-mail est valide et ajoute au contact actuel
+ *
+ * Return: 0
+ */
 int ajout_mail()
 {
     char buffer_ajout_mail[100];
@@ -191,6 +262,13 @@ int ajout_mail()
     ajout_mail();
     return (0);
 }
+/**
+ * ajout_contact - fait appel au fonctions d'ajout
+ * 
+ * Description: fait appel au fonctions d'ajout
+ *
+ * Return: 0
+ */
 int ajout_contact()
 {
     ajout_nom();
@@ -202,6 +280,13 @@ int ajout_contact()
     printf("contact ajoute\n");
     return (0);
 }
+/**
+ * tout_afficher - affiche tout les contacts
+ * 
+ * Description: affiche tout les contacts
+ *
+ * Return: 0
+ */
 int tout_afficher()
 {
     int tout_afficher_index;
@@ -217,7 +302,15 @@ int tout_afficher()
         printf("--------------------------------------------------------------------\n");
         }
     }
+    return (0);
 }
+/**
+ * tout_afficher - modifier un contact déja existant
+ * 
+ * Description: affiche tout les contacts
+ *
+ * Return: 0
+ */
 int modifier_contact()
 {
     tab_null(buffer_modifier_contact);
@@ -250,7 +343,15 @@ int modifier_contact()
             return(0);
     }
     printf("contact modifie\n");
+    return (0);
 }
+/**
+ * supprimer_contact_loops - fonction de loop 
+ * 
+ * Description: pour ne pas encombrer supprimer_contact fonction
+ *
+ * Return: 0
+ */
 int supprimer_contact_loops()
 {
     unsigned int index;
@@ -273,6 +374,13 @@ int supprimer_contact_loops()
 
     return (0);
 }
+/**
+ * supprimer_contact - supprimer
+ * 
+ * Description: supprimer un contact deja existant
+ *
+ * Return: 0
+ */
 int supprimer_contact ()
 {
     tab_null(buffer_supprimer_contact);
@@ -282,12 +390,22 @@ int supprimer_contact ()
     if (recherche_contact(buffer_supprimer_contact) == -1)
     {
         printf("contact introuvable !!\n");
+        sleep(1);
         supprimer_contact();
         return (0);
     }
     supprimer_contact_loops();
     printf("contact supprime\n");
+    sleep(1);
+    return (0);
 }
+/**
+ * menu - fonction d'affichage seulement
+ * 
+ * Description: affiche le menu du programme
+ *
+ * Return: rien
+ */
 void menu()
 {
     printf("1. Ajouter un Contact\n");
@@ -296,13 +414,31 @@ void menu()
     printf("4. Afficher Tous les Contacts\n");
     printf("5. Rechercher un Contact\n");
 }
-int recherche_contact_afficher(char* recherche_contact_nom)
+/**
+ * recherche_contact_afficher- rechercher un contact
+ * 
+ * Description: rechercher un contact si trouvé print ses infos sinon message d'erreur
+ *
+ * Return: rien
+ */
+int recherche_contact_afficher()
 {
     int index_recherche_contact;
 
+    tab_null(buffer_recherche_contact);
+    printf("Entrez le nom  du contact\n");
+    fgets(buffer_recherche_contact, sizeof(buffer_recherche_contact), stdin);
+    no_new_line(buffer_recherche_contact);
+
+    if (recherche_contact(buffer_recherche_contact) == -1)
+    {
+        printf("contact non existant\n");
+        recherche_contact_afficher();
+        return (0);
+    }
     for (index_recherche_contact = 0; index_recherche_contact <= index_ajout; index_recherche_contact++)
     {
-        if (strcmp(liste_contacts[index_recherche_contact].nom, recherche_contact_nom) == 0)
+        if (strcmp(liste_contacts[index_recherche_contact].nom, buffer_recherche_contact) == 0)
         {
             // printf("recherche_contact FUNCTION\n");
             printf("contact trouve\n");
@@ -310,7 +446,7 @@ int recherche_contact_afficher(char* recherche_contact_nom)
             printf("telephone : %s\n", liste_contacts[index_recherche_contact].telephone);
             printf("mail : %s\n", liste_contacts[index_recherche_contact].mail);
             printf("id : %d\n", liste_contacts[index_recherche_contact].id);
-            printf("--------------------------------------------------------------------\n");
+            sleep(1);
 
             return (0); //contact deja existant
         }
@@ -327,9 +463,11 @@ int main ()
     char buffer[100];
     while(1)
     {
+        tab_null(buffer);
         menu();
         printf("choisissez une option\n");
         fgets(buffer, sizeof(buffer), stdin);
+        no_new_line(buffer);
         switch (buffer[0])
         {
             case '\n' :
@@ -351,7 +489,8 @@ int main ()
                 tout_afficher();
                 break;
             case '5' :
-                recherche_contact(buffer);
+                recherche_contact_afficher();
+                break;
             default:
                 continue;
                 //printf("buffer[0] = %c\n", buffer[0]);
