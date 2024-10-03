@@ -744,6 +744,7 @@ int afficher_reservation()
 *
 * return: Toujours 0;
 */
+
 int main ()
 {
     char buffer_main[100];
