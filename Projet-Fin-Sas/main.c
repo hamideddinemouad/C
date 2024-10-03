@@ -737,6 +737,14 @@ int afficher_reservation()
     sleep(2);
     return (0);
 }
+// int tri_reservation()
+// }
+//     char tableau_trie[100]
+// }
+int recherche_reservation()
+{
+    
+}
 /**
 * main - entree du programme
 *
