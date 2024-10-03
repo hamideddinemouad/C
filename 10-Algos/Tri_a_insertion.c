@@ -34,24 +34,33 @@ int print_tableau_int(int taille, int tableau[])
 int main()
 {
     int tableau[] = {1, 5, 0, 9, 4, 7, 2, 5, -1};
-    int taille_tableau = 9;
-    int index1;
-    int index2;
+    int taille_tableau = 11;
+    int index = 1;
+    int iterations = 0;
+    //int index2;
     int temp;
+
     printf("Avant:");
     print_tableau_int(taille_tableau, tableau);
-    temp = tableau[0];
-    for (index1 = 0; index1 < taille_tableau; index1++)
+
+    while(index < taille_tableau)
     {
-        for (index2 = 0; index2 < taille_tableau; index2++)
+        printf("index = %d\n", index);
+        if (tableau[index] < tableau[index - 1])
         {
-            if (tableau[index2] > tableau[index2 + 1])
+            temp = tableau[index];
+            tableau[index] = tableau[index - 1];
+            tableau[index - 1] = temp;
+            if (index > 1)
             {
-                temp = tableau[index2];
+                index = index - 2;
             }
         }
+        index++;
+        iterations++;
     }
     printf("apres:");
     print_tableau_int(taille_tableau, tableau);
+    printf("iterations: %d", iterations);
     return (0);
 }

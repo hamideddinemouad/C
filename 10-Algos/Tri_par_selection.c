@@ -22,37 +22,29 @@ int print_tableau_int(int taille, int tableau[])
             printf("%d]\n", tableau[i]);
         }
     }
+    return (0);
 }
 /*
 * main - entree du programme
 *
-* description - implementation de tri à bulles
+* description - implementation de tri à insertion
 *
 * return:  toujours 0;
 */
 int main()
 {
     int tableau[] = {1, 5, 0, 9, 4, 7, 2, 5, -1};
-    int taille_tableau = 9;
-    int index1;
-    int index2;
+    int taille_tableau = 11;
+    int index = 1;
+    int iterations = 0;
+    //int index2;
     int temp;
 
     printf("Avant:");
     print_tableau_int(taille_tableau, tableau);
-    for (index2 = 0; index2 < taille_tableau; index2++)
-    {
-        for (index1 = 0; index1 < taille_tableau; index1++)
-        {
-            if (tableau[index1] > tableau[index1 + 1])
-            {
-                temp = tableau[index1];
-                tableau[index1] = tableau[index1 + 1];
-                tableau[index1 + 1] = temp;
-            }
-        }
-    }
+    for ("")
     printf("apres:");
     print_tableau_int(taille_tableau, tableau);
+    printf("iterations: %d", iterations);
     return (0);
 }

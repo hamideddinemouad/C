@@ -160,7 +160,7 @@ int ajout_nom()
  *
  * Description: on rajoute si le numéro est valide et s'il n'existe pas déjà dans la liste des contacts.
  * 
- * Return: toujours (0)
+ * Return: rien (void)
  */
 int ajout_telephone()
 {
