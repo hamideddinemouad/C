@@ -127,13 +127,20 @@ int mon_fgets(char* buffer)
 
  void affiche_patient(int index_affiche)
  {
-    printf("nom - %s\n", base_patients[index_affiche].nom);
-    printf("prenom - %s\n", base_patients[index_affiche].prenom);
-    printf("telephone - %s\n", base_patients[index_affiche].telephone);
-    printf("age - %d\n", base_patients[index_affiche].age);
-    printf("statut - %s\n", base_patients[index_affiche].statut);
-    printf("date de reservation - %s\n", base_patients[index_affiche].date_reservation);
-    printf("id - %d\n", base_patients[index_affiche].reference);
+    if (base_patients[index_affiche].nom[0] != '\0')
+    {
+        printf("nom - %s\n", base_patients[index_affiche].nom);
+        printf("prenom - %s\n", base_patients[index_affiche].prenom);
+        printf("telephone - %s\n", base_patients[index_affiche].telephone);
+        printf("age - %d\n", base_patients[index_affiche].age);
+        printf("statut - %s\n", base_patients[index_affiche].statut);
+        printf("date de reservation - %s\n", base_patients[index_affiche].date_reservation);
+        printf("id - %d\n", base_patients[index_affiche].reference);
+    }
+    else
+    {
+        printf("donnés supprimé\n");
+    }
  }
 /**
  * recherche_contact - recherche un patient par nom
@@ -546,6 +553,40 @@ int trouver_reservation_id(int id_recherche)
     }
     return (-1);
 }
+int supprimer_reservation()
+{
+    int index = 0;
+    int id_suppression;
+    int tmp;
+    char buffer_suppression[100];
+
+    printf("Entrez ID que vous voulez supprimer\n");
+    mon_fgets(buffer_suppression);
+    if (numero_valide(buffer_suppression) == 0)
+    {
+        supprimer_reservation();
+        return (0);
+    }
+    id_suppression = atoi(buffer_suppression);
+    index = trouver_reservation_id(id_suppression);
+    if (index < 0)
+    {
+        printf("reference introuvable\n");
+        supprimer_reservation();
+        return (0);
+    }
+    printf("reference trouve\n");
+    sleep(2);
+    affiche_patient(index);
+    sleep(2);
+    tab_null(base_patients[index].nom);
+    tab_null(base_patients[index].prenom);
+    tab_null(base_patients[index].telephone);
+    tab_null(base_patients[index].statut);
+    tab_null(base_patients[index].date_reservation);
+    printf("la reference %d a ete supprime avec succes\n", id_suppression);
+    return (0);
+}
 int modifier_reservation()
 {
     int index = 0;
@@ -588,11 +629,35 @@ int modifier_reservation()
                 index_ajout = index;
                 ajouter_nom();
                 index_ajout = tmp;
-                break;
+                return (0);
+            case '2':
+                tmp = index_ajout;
+                index_ajout = index;
+                ajouter_age();
+                index_ajout = tmp;
+                return (0);
+            case '3':
+                tmp = index_ajout;
+                index_ajout = index;
+                ajouter_telephone();
+                index_ajout = tmp;
+                return (0);
+            case '4':
+                tmp = index_ajout;
+                index_ajout = index;
+                ajouter_statut();
+                index_ajout = tmp;
+                return (0);
+            case '5':
+                tmp = index_ajout;
+                index_ajout = index;
+                ajouter_date();
+                index_ajout = tmp;
+                return (0);
             default:
                 printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
                 modifier_reservation();
-                break;
+                return(0);
         }
     }
     else
@@ -600,6 +665,7 @@ int modifier_reservation()
         printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
         sleep(2);
         modifier_reservation();
+        return (0);
     }
     return (0);
 }
@@ -626,7 +692,7 @@ int modifier_supprimer()
                 modifier_reservation();
                 return(0);
             case '2':
-                //supprimer_reservation();
+                supprimer_reservation();
                 return (0);
             default:
                 printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
@@ -642,6 +708,34 @@ int modifier_supprimer()
         sleep(2);
     }
 
+}
+int afficher_reservation()
+{
+    int index = 0;
+    int id_trouver;
+    int tmp;
+    char buffer_trouver[100];
+
+    printf("Entrez ID que vous voulez afficher\n");
+    mon_fgets(buffer_trouver);
+    if (numero_valide(buffer_trouver) == 0)
+    {
+        afficher_reservation();
+        return (0);
+    }
+    id_trouver = atoi(buffer_trouver);
+    index = trouver_reservation_id(id_trouver);
+    if (index < 0)
+    {
+        printf("reference introuvable\n");
+        afficher_reservation();
+        return (0);
+    }
+    printf("reference trouve\n");
+    sleep(2);
+    affiche_patient(index);
+    sleep(2);
+    return (0);
 }
 /**
 * main - entree du programme
@@ -671,7 +765,7 @@ int main ()
                     modifier_supprimer();
                     break;
                 case '3' :
-                    printf("case 3\n");
+                    afficher_reservation();
                     break;
                 case '4' :
                     printf("case 4\n");
