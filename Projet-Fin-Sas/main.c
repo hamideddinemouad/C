@@ -42,7 +42,7 @@ typedef struct infos_patient
     char date_reservation[100];
     int reference;
 }patient;
-int id = 10;
+int id = 11;
 int index_ajout = 10; //PEUT CREER DES PROBLEMES
 patient base_patients[100] = 
 {
@@ -539,7 +539,7 @@ int trouver_reservation_id(int id_recherche)
     //trouver l'id
     for (index = 0; index <= index_ajout; index++)
     {
-        if(base_patients[index].id == id_recherche)
+        if(base_patients[index].reference == id_recherche)
         {
             return(index);
         }
@@ -550,6 +550,7 @@ int modifier_reservation()
 {
     int index = 0;
     int id_modification;
+    int tmp;
     char buffer_modification[100];
 
     printf("Entrez ID que vous voulez modifer\n");
@@ -560,36 +561,47 @@ int modifier_reservation()
         return (0);
     }
     id_modification = atoi(buffer_modification);
-    index = trouver_reservation_id(id_modification)
+    index = trouver_reservation_id(id_modification);
     if (index < 0)
     {
         printf("reference introuvable\n");
-        modifer_reservation();
+        modifier_reservation();
         return (0);
     }
-    printf("reference trouvé\n");
+    printf("reference trouve\n");
     sleep(2);
     affiche_patient(index);
+    sleep(2);
     printf("entrez ce que vous  voulez modifier\n");
     printf("1- pour modifier le nom\n");
     printf("2 - pour modfiier l'age\n");
     printf("3 - pour modifier telephone \n");
     printf("4 - pour modifier statut\n");
     printf("5 - pour modifier la date de reservation \n");
-    if (strlen(buffer_main) < 2)
+    mon_fgets(buffer_modification);
+    if (strlen(buffer_modification) < 2)
     {
-        mon_fgets(buffer_modification);
-        switch (buffer_modification[0]):
+        switch (buffer_modification[0])
         {
             case '1':
-                ajout
+                tmp = index_ajout;
+                index_ajout = index;
+                ajouter_nom();
+                index_ajout = tmp;
+                break;
+            default:
+                printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                modifier_reservation();
+                break;
         }
     }
     else
     {
         printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
         sleep(2);
+        modifier_reservation();
     }
+    return (0);
 }
 /**
 * modfier_supprimer - ajoute reservation
@@ -598,16 +610,15 @@ int modifier_reservation()
 *
 * return: 0 si succes 1 si echec;
 */
-int modfier_supprimer()
+int modifier_supprimer()
 {
     char buffer_modification_suppression[100];
 
     printf("1 - modifier une reservation entrez 1\n");
     printf("2 - supprimer une reservation\n");
-    printf("0 - revenir en arriere")
     mon_fgets(buffer_modification_suppression);
 
-    if (strlen(buffer_main) < 2)
+    if (strlen(buffer_modification_suppression) < 2)
     {
         switch(buffer_modification_suppression[0])
         {
@@ -615,7 +626,7 @@ int modfier_supprimer()
                 modifier_reservation();
                 return(0);
             case '2':
-                supprimer_reservation();
+                //supprimer_reservation();
                 return (0);
             default:
                 printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
@@ -657,7 +668,7 @@ int main ()
                     //printf("%s\n", base_patients[0].nom);
                     break;
                 case '2' :
-                    modfier_supprimer();
+                    modifier_supprimer();
                     break;
                 case '3' :
                     printf("case 3\n");
