@@ -10,10 +10,17 @@
 *
 * return: rien;
 */
+#define RED "\033[31m"
+#define BLUE "\033[34m"
+#define RESET "\033[0m"
+#define GREEN "\033[32m"
+
+
 void menu()
 {
-    printf("Bienvenue dans Docteur Reservation\n");
+    printf(BLUE "Bienvenue dans Docteur Reservation\n" RESET);
     sleep(3);
+    printf("*******************************************\n");
     printf("1. Ajouter une reservation\n");
     printf("2. Modifier ou supprimer une reservation\n");
     printf("3. Afficher les details d'une reservation\n");
@@ -21,6 +28,7 @@ void menu()
     printf("5. Recherche des reservation\n");
     printf("6. Statistiques \n");
     printf("0. Quitter\n");
+    printf("*******************************************\n");
     printf("Entrez le numero de l'option que vous souhaitez !\n");
 }
 /**
@@ -129,6 +137,7 @@ int mon_fgets(char* buffer)
  {
     if (base_patients[index_affiche].nom[0] != '\0')
     {
+        printf("*******************************************\n");
         printf("nom - %s\n", base_patients[index_affiche].nom);
         printf("prenom - %s\n", base_patients[index_affiche].prenom);
         printf("telephone - %s\n", base_patients[index_affiche].telephone);
@@ -136,6 +145,7 @@ int mon_fgets(char* buffer)
         printf("statut - %s\n", base_patients[index_affiche].statut);
         printf("date de reservation - %s\n", base_patients[index_affiche].date_reservation);
         printf("id - %d\n", base_patients[index_affiche].reference);
+        printf("*******************************************\n");
     }
  }
 /**
@@ -190,18 +200,18 @@ int ajouter_nom()
     mon_fgets(buffer_ajout_nom);
     if (test_non_alpha(buffer_ajout_nom) < 0)
     {
-        printf("Que des lettres\n");
+        printf("\033[31mQue des lettres\033[0m\n");
         ajouter_nom();
         return (0);
     }
     if (recherche_patient_nom(buffer_ajout_nom) >= 0) //contact existant et return index
     {
-        printf("nom déja existant\n");
+        printf("\033[31mQue des lettres\033[0m\n");
         ajouter_nom();
         return (0);
     }
     strcpy(base_patients[index_ajout].nom, buffer_ajout_nom);
-    printf("nom ajoute avec succes\n");
+    printf(BLUE "nom ajoute avec succes\n"  RESET);
     return (0);
 }
 
@@ -221,12 +231,12 @@ int ajouter_prenom()
     mon_fgets(buffer_ajout_prenom);
     if (test_non_alpha(buffer_ajout_prenom) < 0)
     {
-        printf("Que des lettres\n");
+        printf("\033[31mQue des lettres\033[0m\n");
         ajouter_prenom();
         return (0);
     }
     strcpy(base_patients[index_ajout].prenom, buffer_ajout_prenom);
-    printf("prenom ajoute avec succes\n");
+    printf(BLUE "prenom ajoute avec succes\n" RESET);
     return (0);
 }
 /**
@@ -244,7 +254,8 @@ int numero_valide(char* str_numero)
     {
         if(!isdigit(str_numero[numero_valide_index]))
         {
-            printf("que des numero!!\n");
+            //printf("\033[31mQue des lettres\033[0m\n");
+            printf(RED "que des numero!!\n" RESET);
             return (0); //fonction a detecté un character autre que numero
         }
     }
@@ -285,10 +296,10 @@ int ajouter_telephone()
     if (recherche_num(buffer_ajout_tel) == -1)
     {
         strcpy(base_patients[index_ajout].telephone, buffer_ajout_tel);
-        printf("numero de telephone ajoute\n");
+        printf(BLUE "numero de telephone ajoute\n" RESET);
         return(0);
     }
-    printf("numero deja existant\n");
+    printf(RED "numero deja existant\n" RESET);
     ajouter_telephone();
     return (0);
 }
@@ -308,14 +319,14 @@ int ajouter_age()
     mon_fgets(buffer_ajout_age);
     if (strlen(buffer_ajout_age) > 3)
     {
-        printf("%s n'est pas un age valide\n", buffer_ajout_age);
+        printf(RED "%s n'est pas un age valide\n" RESET, buffer_ajout_age);
         sleep(3);
         ajouter_age();
         return (0);
     }
     if (numero_valide(buffer_ajout_age) == 0)
     {
-        printf("Charactere autre que numero detecte\n");
+        printf(RED "Charactere autre que numero detecte\n" RESET);
         sleep(3);
         ajouter_age();
         return (0);
@@ -323,20 +334,20 @@ int ajouter_age()
     age_to_test = atoi(buffer_ajout_age);
     if (age_to_test < 0)
     {
-        printf("valeur negative dans l'age detecté entrez une valeur positive\n");
+        printf(RED "valeur negative dans l'age detecté entrez une valeur positive\n" RESET);
         sleep(3);
         ajouter_age();
         return (0);
     }
     if (age_to_test > 130)
     {
-        printf("age invalide\n");
+        printf(RED "age invalide\n" RESET);
         sleep(3);
         ajouter_age();
         return (0);
     }
     base_patients[index_ajout].age = age_to_test;
-    printf("age : %d  est valide et ajoute avec succes\n", base_patients[index_ajout].age);
+    printf(BLUE "age : %d  est valide et ajoute avec succes\n" RESET, base_patients[index_ajout].age);
     return (0);
 }
 /**
@@ -350,6 +361,7 @@ int ajouter_age()
  {
     char buffer_ajout_statut[100];
 
+    printf("*******************************************\n");
     printf("Veuillez choisir une statut\n");
     printf("1 - Valide\n");
     printf("2 - Reporte\n");
@@ -362,28 +374,28 @@ int ajouter_age()
         {
             case '1':
                 strcpy(base_patients[index_ajout].statut, "VALIDE");
-                printf("Statut ajoute\n");
+                printf(BLUE "Statut ajoute\n" RESET);
                 return (0);
             case '2':
                 strcpy(base_patients[index_ajout].statut, "REPORTE");
-                printf("Statut ajoute\n");
+                printf(BLUE "Statut ajoute\n" RESET);
                 return (0);
             case '3':
                 strcpy(base_patients[index_ajout].statut, "ANNULE");
-                printf("Statut ajoute\n");
+                printf(BLUE "Statut ajoute\n" RESET);
                 return (0);
             case '4':
                 strcpy(base_patients[index_ajout].statut, "TRAITE");
-                printf("Statut ajoute\n");
+                printf(BLUE "Statut ajoute\n" RESET);
                 return (0);
             default :
-                printf("choix introuvable Entrez un numero entre 1 et 4\n");
+                printf(RED "choix introuvable Entrez un numero entre 1 et 4\n" RESET);
                 sleep(3);
                 ajouter_statut();
                 return (0);
         }
     }
-    printf("Entree invalide\n");
+    printf(RED "Entree invalide\n" RESET);
     ajouter_statut();
     return(0);
  }
@@ -400,20 +412,20 @@ int ajouter_age()
 
     if (strlen(str_date) > 4)
     {
-        printf("que quatre nombres pour lannee par example 2024\n");
+        printf(RED "que quatre nombres pour lannee par example 2024\n" RESET);
         sleep (3);
         return (-1);
     }
     if (numero_valide(str_date) == 0)
     {
-        printf("Charactere autre que numero detecte\n");
+        printf(RED "Charactere autre que numero detecte\n" RESET);
         sleep (3);
         return (-1);
     }
     numero = atoi(str_date);
     if (numero <= 2023 )
     {
-        printf("pas de rdv en arriere\n");
+        printf(RED "pas de rdv en arriere\n" RESET);
         sleep (3);
         return (-1);
     }
@@ -447,7 +459,7 @@ int ajouter_age()
     numero = atoi(str_date);
     if (numero > condition || numero < 1 )
     {
-        printf("jour %d existe pas\n", numero);
+        printf(RED "jour %d existe pas\n" RESET, numero);
         sleep (3);
         return (-1);
     }
@@ -466,20 +478,20 @@ int ajouter_age()
 
     if (strlen(str_date) > 2)
     {
-        printf("que deux nombres pour le mois par example 06 ou 6 pour juin\n");
+        printf(RED "que deux nombres pour le mois par example 06 ou 6 pour juin\n" RESET);
         sleep (3);
         return (-1);
     }
     if (numero_valide(str_date) == 0)
     {
-        printf("Charactere autre que numero detecte\n");
+        printf(RED "Charactere autre que numero detecte\n" RESET);
         sleep (3);
         return (-1);
     }
     numero = atoi(str_date);
     if (numero > 12 || numero < 1 )
     {
-        printf("mois %d existe pas\n", numero);
+        printf(RED "mois %d existe pas\n" RESET, numero);
         return (-1);
     }
     return (0);
@@ -554,6 +566,13 @@ int ajouter_reservation()
     }
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int trouver_reservation_id(int id_recherche)
 {
     int index;
@@ -567,6 +586,13 @@ int trouver_reservation_id(int id_recherche)
     }
     return (-1);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int supprimer_reservation()
 {
     int index = 0;
@@ -584,11 +610,11 @@ int supprimer_reservation()
     index = trouver_reservation_id(id_suppression);
     if (index < 0)
     {
-        printf("reference introuvable\n");
+        printf(RED "reference introuvable\n" RESET);
         supprimer_reservation();
         return (0);
     }
-    printf("reference trouve\n");
+    printf(RED "reference trouve\n" RESET);
     sleep(2);
     affiche_patient(index);
     sleep(2);
@@ -598,7 +624,7 @@ int supprimer_reservation()
     tab_null(base_patients[index].statut);
     tab_null(base_patients[index].date_reservation);
     base_patients[index].reference = 0;
-    printf("la reference %d a ete supprime avec succes\n", id_suppression);
+    printf(BLUE "la reference %d a ete supprime avec succes\n" RESET, id_suppression);
     return (0);
 }
 int modifier_reservation()
@@ -619,14 +645,15 @@ int modifier_reservation()
     index = trouver_reservation_id(id_modification);
     if (index < 0)
     {
-        printf("reference introuvable\n");
+        printf(RED "reference introuvable\n" RESET);
         modifier_reservation();
         return (0);
     }
-    printf("reference trouve\n");
+    printf(BLUE "reference trouve\n" RESET);
     sleep(2);
     affiche_patient(index);
     sleep(2);
+    printf("*******************************************\n");
     printf("entrez ce que vous  voulez modifier\n");
     printf("1- pour modifier le nom\n");
     printf("2 - pour modfiier l'age\n");
@@ -634,6 +661,7 @@ int modifier_reservation()
     printf("4 - pour modifier statut\n");
     printf("5 - pour modifier la date de reservation \n");
     printf("6 - pour modifier le prenom \n");
+    printf("*******************************************\n");
     mon_fgets(buffer_modification);
     if (strlen(buffer_modification) < 2)
     {
@@ -676,7 +704,7 @@ int modifier_reservation()
                 index_ajout = tmp;
                 return (0);
             default:
-                printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
                 modifier_reservation();
                 return(0);
         }
@@ -684,7 +712,7 @@ int modifier_reservation()
     }
     else
     {
-        printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+        printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
         sleep(2);
         modifier_reservation();
         return (0);
@@ -702,8 +730,10 @@ int modifier_supprimer()
 {
     char buffer_modification_suppression[100];
 
+    printf("*******************************************\n");
     printf("1 - modifier une reservation entrez 1\n");
     printf("2 - supprimer une reservation\n");
+    printf("*******************************************\n");
     mon_fgets(buffer_modification_suppression);
 
     if (strlen(buffer_modification_suppression) < 2)
@@ -717,7 +747,7 @@ int modifier_supprimer()
                 supprimer_reservation();
                 return (0);
             default:
-                printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
                 sleep(2);
                 modifier_supprimer();
                 return (0);
@@ -726,11 +756,18 @@ int modifier_supprimer()
     }
     else
     {
-        printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+        printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
         sleep(2);
     }
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int afficher_reservation()
 {
     int index = 0;
@@ -748,43 +785,60 @@ int afficher_reservation()
     index = trouver_reservation_id(id_trouver);
     if (index < 0)
     {
-        printf("reference introuvable\n");
+        printf(RED "reference introuvable\n" RESET);
         afficher_reservation();
         return (0);
     }
-    printf("reference trouve\n");
+    printf(BLUE "reference trouve\n" RESET);
     sleep(2);
     affiche_patient(index);
     sleep(2);
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int afficher_reservation_nom()
 {
     char buffer_afficher_nom[100];
     int index;
 
+    printf("*******************************************\n");
     printf("entrez le nom que vous voulez rechercher\n");
     mon_fgets(buffer_afficher_nom);
 
     if (recherche_patient_nom(buffer_afficher_nom) < 0)
     {
-        printf("pas de reservation sous ce nom\n");
+        printf(RED "pas de reservation sous ce nom\n" RESET);
         sleep (3);
         afficher_reservation_nom();
         return (0);
     }
     index = recherche_patient_nom(buffer_afficher_nom);
-    printf("reservation trouve \n");
+    printf(BLUE "reservation trouve \n" RESET);
     sleep(2);
     affiche_patient(index);
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int recherche_reservation()
 {
     char buffer_recherche_reservation[100];
+
+    printf("*******************************************\n");
     printf("1 - recherche par id\n");
     printf("2 - recherche par nom\n");
-
+    printf("*******************************************\n");
     mon_fgets(buffer_recherche_reservation);
     if (strlen(buffer_recherche_reservation) < 2)
         {
@@ -798,20 +852,27 @@ int recherche_reservation()
                     return (0);
                     break;
                 default:
-                    printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                    printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
                     sleep(2);
                     recherche_reservation();
             }
         }
         else
         {
-            printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+            printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
             sleep(2);
             recherche_reservation();
             return(0);
         }
         return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int afficher_age_moyen()
 {
     int i;
@@ -824,6 +885,13 @@ int afficher_age_moyen()
     printf("Moyenne dage  des patients = %d\n", total_age/i);
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int afficher_par_tranche()
 {
     int i;
@@ -846,11 +914,20 @@ int afficher_par_tranche()
             trente_six++;
         }
     }
+    printf("*******************************************\n");
     printf(" 0-18 ans : %d\n", dix_huit);
     printf("19-35 ans : %d\n", dixneuf_trentecinq);
     printf("36+ ans : %d\n", trente_six);
+    printf("*******************************************\n");
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int afficher_statut()
 {
     int i;
@@ -878,16 +955,27 @@ int afficher_statut()
             traite++;
         }
     }
+    printf("*******************************************\n");
     printf("Total valide : %d\nTotal reporte : %d\nTotal annule : %d\nTotal traite : %d\n",valide, reporte, annule, traite);
+    printf("*******************************************\n");
     return (0);
 }
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int statistiques()
 {
     char buffer_statistique[100];
+    printf("*******************************************\n");
     printf("1 - afficher age moyen\n");
     printf("2 - Afficher le nombre de patients par tranche d'age\n");
     printf("3 - connaitre le nombre total de reservations par statut (valide, annule, etc.)\n");
-
+    printf("*******************************************\n");
+    
     mon_fgets(buffer_statistique);
     if (strlen(buffer_statistique) < 2)
         {
@@ -903,7 +991,7 @@ int statistiques()
                     afficher_statut();
                     return (0);
                 default:
-                    printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                    printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
                     sleep(2);
                     statistiques();
                     return (0);
@@ -911,13 +999,21 @@ int statistiques()
         }
         else
         {
-            printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+            printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
             sleep(2);
             statistiques();
             return(0);
         }
     return (0);
 }
+
+/**
+* main - entree du programme
+*
+* description: entree du programme et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int tri_par_nom()
 {
     char tmp[100][100];
@@ -954,6 +1050,13 @@ int tri_par_nom()
     return (0);
 }
 
+/**
+* tri_par_statut - tri_par_statut
+*
+* description: trier par statut
+*
+* return: Toujours 0;
+*/
 int tri_par_statut()
 {
     int valide_index[100]; //what if tout est valide
@@ -1032,6 +1135,14 @@ int tri_par_statut()
 
     return (0);
 }
+
+/**
+* tri_reservation - tri_reservatio
+*
+* description: entree du choix de tri et fait appel au fonctions
+*
+* return: Toujours 0;
+*/
 int tri_reservation()
 {
     char buffer_tri_reservation[100];
@@ -1050,7 +1161,7 @@ int tri_reservation()
                     tri_par_statut();
                     return (0);
                 default:
-                    printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                    printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
                     sleep(2);
                     tri_reservation();
                     return (0);
@@ -1058,7 +1169,7 @@ int tri_reservation()
         }
         else
         {
-            printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+            printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
             sleep(2);
             tri_reservation();
             return(0);
@@ -1110,16 +1221,16 @@ int main ()
                     sleep(2);
                     return (0);
                 default:
-                    printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+                    printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
                     sleep(2);
                     break;
             }
         }
         else
         {
-            printf("Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n");
+            printf(RED "Entrez un choix valide par exemple 1 et appuyez sur Entrer pour valider\n" RESET);
             sleep(2);
         }
     }
-        return (0);
+    return (0);
 }
